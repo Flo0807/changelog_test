@@ -42,6 +42,7 @@ awk -v version="$VERSION" '
         if (index($0, "## " version " ") > 0 || index($0, "## " version) > 0) {
             found = 1
             printing = 1
+            next  # Skip the version header line
         }
     }
 
