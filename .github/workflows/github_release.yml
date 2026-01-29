@@ -24,14 +24,9 @@ jobs:
         run: |
           if CHANGELOG=$(bash scripts/extract-changelog.sh "${{ steps.version.outputs.version }}" 2>/dev/null); then
             echo "$CHANGELOG" > release_notes.md
-            echo "" >> release_notes.md
-            echo "---" >> release_notes.md
           else
-            echo "No changelog entry found for ${{ steps.version.outputs.version }}." > release_notes.md
+            echo "**[View changelog](https://github.com/${{ github.repository }}/blob/${{ steps.version.outputs.version }}/CHANGELOG.md)**" > release_notes.md
           fi
-
-          echo "" >> release_notes.md
-          echo "**[View full changelog](https://github.com/${{ github.repository }}/blob/${{ steps.version.outputs.version }}/CHANGELOG.md)**" >> release_notes.md
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
